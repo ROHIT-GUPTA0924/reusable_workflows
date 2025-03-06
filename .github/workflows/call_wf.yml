@@ -10,6 +10,6 @@ on:
 
 jobs:
   call-deploy-webapp:
-    uses: ./.github/workflows/deploy-webapp.yml
+    uses: ./.github/workflows/deploy-wf.yml
     with:
       webapp_type: ${{ github.event.inputs.webapp_type }}

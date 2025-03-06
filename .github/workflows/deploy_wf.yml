@@ -23,11 +23,11 @@ jobs:
 
     - name: Terraform Init
       run: terraform init
-      working-directory: ../invocation
+      working-directory: ../../invocation
 
     - name: Terraform Apply
       run: terraform apply -auto-approve
-      working-directory: ../invocation
+      working-directory: ../../invocation
       env:
         ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
         ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
