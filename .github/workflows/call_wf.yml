@@ -1,0 +1,15 @@
+name: Main Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      webapp_type:
+        description: 'Type of web app to deploy (linux or windows)'
+        required: true
+        default: 'linux'
+
+jobs:
+  call-deploy-webapp:
+    uses: ./.github/workflows/deploy-webapp.yml
+    with:
+      webapp_type: ${{ github.event.inputs.webapp_type }}
