@@ -23,25 +23,21 @@ jobs:
 
     - name: Terraform Init
       run: terraform init
+      working-directory: ../invocation
 
     - name: Terraform Apply
       run: terraform apply -auto-approve
+      working-directory: ../invocation
       env:
         ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
         ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
         ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
 
-    - name: Deploy Windows Web App
+    - name: Display Message for Windows Web App
       if: ${{ inputs.webapp_type == 'windows' }}
-      run: |
-        az webapp config appsettings set --resource-group example-resources --name example-windows-webapp --settings WEBSITES_ENABLE_APP_SERVICE_STORAGE=FALSE
-        az webapp config appsettings set --resource-group example-resources --name example-windows-webapp --settings WEBSITE_RUN_FROM_PACKAGE=1
-        az webapp deployment source config-zip --resource-group example-resources --name example-windows-webapp --src-path path/to/your/sqlserver/package.zip
+      run: echo "Your Windows WEBAPP is ready to go!"
 
-    - name: Deploy Linux Web App
+    - name: Display Message for Linux Web App
       if: ${{ inputs.webapp_type == 'linux' }}
-      run: |
-        az webapp config appsettings set --resource-group example-resources --name example-linux-webapp --settings WEBSITES_ENABLE_APP_SERVICE_STORAGE=FALSE
-        az webapp config appsettings set --resource-group example-resources --name example-linux-webapp --settings WEBSITE_RUN_FROM_PACKAGE=1
-        az webapp deployment source config-zip --resource-group example-resources --name example-linux-webapp --src-path path/to/your/sqlserver/package.zip
+      run: echo "Your Linux WEBAPP is ready to go!"
